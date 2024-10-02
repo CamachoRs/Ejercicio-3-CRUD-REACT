@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { FaUserPlus, FaUserEdit } from "react-icons/fa";
+import { MdCancel } from "react-icons/md";
 
 function ContactForm({ addContact, currentContact, onCancel }) {
     const [error, setError] = useState('');
@@ -71,19 +73,24 @@ function ContactForm({ addContact, currentContact, onCancel }) {
                 />
             </div>
             {error && <p className="text-red-500 text-xs italic mb-4">{error}</p>}
-            <button type="submit" className="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                {currentContact ? 'Editar contacto' : 'Agregar contacto'}
-            </button>
-            {currentContact && (
-                <button
-                    type="button"
-                    onClick={onCancel}
-                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 ml-4 rounded focus:outline-none focus:shadow-outline">
-                    Cancelar
+            <div className='flex items-center space-x-4'>
+                <button type="submit" className="bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center space-x-2">
+                    {currentContact ? (
+                        <><span>Editar contacto</span> <FaUserEdit /></>
+                    ) : (
+                        <><span>Agregar contacto</span> <FaUserPlus /></>
+                    )}
                 </button>
-            )}
+                {currentContact && (
+                    <button
+                        type="button"
+                        onClick={onCancel}
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 ml-4 rounded focus:outline-none focus:shadow-outline flex items-center space-x-2">
+                        <span>Cancelar</span> <MdCancel />
+                    </button>
+                )}
+            </div>
         </form>
-
     );
 };
 
